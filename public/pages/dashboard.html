@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clutter | Dashboard</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+  <link rel="stylesheet" href="../css/clutter.css">
+
+  <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon" />
+</head>
+
+<body>
+
+  <button class="menu-toggle" aria-label="Toggle Navigation">
+    <i class="fas fa-bars"></i>
+  </button>
+
+  <div class="sidebar" id="sidebar">
+    <div class="logo">
+      <img src="../images/favicon.png" alt="Clutter Logo" />
+      <h2>Clutter</h2>
+    </div>
+
+    <nav class="nav-section">
+      <ul class="links-list">
+        <li>
+          <a href="dashboard.html" class="active"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a>
+        </li>
+        <li>
+          <a href="saved-links.html"><i class="fas fa-link"></i> <span>Saved Links</span></a>
+        </li>
+        <li>
+          <a href="account.html"><i class="fas fa-user-circle"></i> <span>My Account</span></a>
+        </li>
+        <li>
+          <a href="#" id="logout-trigger"><i class="fas fa-sign-out-alt"></i> <span>Log Out</span></a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="dashboard-main">
+    <div class="dashboard-title">Dashboard</div>
+
+    <div class="card welcome-section no-anim">
+      <div class="welcome-text">
+        <h3>Welcome, John Doe</h3>
+        <p>Your personalized dashboard for general organization.</p>
+      </div>
+      <div class="profile-actions">
+        <button onclick="openModal()"><i class="fas fa-plus"></i> Add New Link</button>
+      </div>
+    </div>
+
+    <div class="grid-container">
+
+      <div class="card clutter-card">
+        <div class="clutter-header"><i class="fas fa-link"></i><span class="clutter-label">Total Saved Links</span>
+        </div>
+        <div class="clutter-value">38</div>
+        <div class="clutter-label">Avg. Links per Day</div>
+        <div class="clutter-value secondary-data">3</div>
+      </div>
+
+      <div class="card clutter-card">
+        <div class="clutter-header"><i class="fas fa-tags"></i><span class="clutter-label">Unique Tags Used</span></div>
+        <div class="clutter-value">45</div>
+        <div class="clutter-label">Most Used Tag</div>
+        <div class="clutter-value secondary-data">Productivity</div>
+      </div>
+
+      <div class="card clutter-card">
+        <div class="clutter-header"><i class="fas fa-star"></i><span class="clutter-label">Starred Links</span></div>
+        <div class="clutter-value">12</div>
+        <div class="clutter-label">Recently Starred</div>
+        <div class="clutter-value highlight-green">5</div>
+      </div>
+
+      <div class="card clutter-card">
+        <div class="clutter-header">
+          <span class="clutter-label">Link Activity Score</span>
+        </div>
+        <div class="clutter-value highlight-green" style="font-size: 2.5rem; line-height: 1;">A+</div>
+        <div class="clutter-label">Avg. Session Duration</div>
+        <div class="clutter-value highlight-red">12 min</div>
+      </div>
+
+      <div class="card status-section no-anim">
+        <div class="status-title">Link Categorization Breakdown</div>
+        <div class="status-labels">
+          <div class="status-item">
+            <div class="status-count">18</div>
+            <div class="status-name available">New</div>
+          </div>
+          <div class="status-item">
+            <div class="status-count">21</div>
+            <div class="status-name">Archived</div>
+          </div>
+          <div class="status-item">
+            <div class="status-count">11</div>
+            <div class="status-name">Shared</div>
+          </div>
+          <div class="status-item">
+            <div class="status-count">28</div>
+            <div class="status-name sold">Starred</div>
+          </div>
+        </div>
+        <div class="status-bar-wrapper">
+          <div class="bar-segment bar-available" style="width: 20%;"></div>
+          <div class="bar-segment bar-reserved" style="width: 25%;"></div>
+          <div class="bar-segment bar-offered" style="width: 15%;"></div>
+          <div class="bar-segment bar-sold" style="width: 40%;"></div>
+        </div>
+      </div>
+
+      <div class="card no-anim">
+        <div class="status-title">Quick Stats</div>
+        <p class="clutter-label" style="margin-bottom: 5px;">Broken Links Found:</p>
+        <p class="clutter-value highlight-red" style="font-size: 1.5rem;">3</p>
+        <hr style="border: 0; border-top: 1px solid var(--border-light); margin: 10px 0;">
+        <p class="clutter-label" style="margin-bottom: 5px;">Files/Attachments Stored:</p>
+        <p class="clutter-value secondary-data" style="font-size: 1.5rem;">----</p>
+      </div>
+
+      <div class="card chart-section no-anim">
+        <div class="chart-header">
+          <h3>Links Added Over Time</h3>
+          <div class="chart-controls">
+            <select>
+              <option>Last 30 Days</option>
+            </select>
+            <select>
+              <option>All Time</option>
+            </select>
+          </div>
+        </div>
+        <div class="chart-placeholder">
+          [Placeholder for Bar Chart/Graph]
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Modals-->
+  <div id="add-link-modal" class="modal-overlay" onclick="closeModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3>Add New Link</h3>
+        <button class="modal-close" onclick="closeModal()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <form id="link-form">
+        <div class="form-group">
+          <label for="link-url">URL *</label>
+          <input type="url" id="link-url" name="url" placeholder="https://www.example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="link-title">Title</label>
+          <input type="text" id="link-title" name="title" placeholder="A descriptive title for your link">
+        </div>
+        <div class="form-group">
+          <label for="link-tags">Tags (Comma Separated)</label>
+          <input type="text" id="link-tags" name="tags" placeholder="productivity, design, tutorial">
+        </div>
+        <div class="form-group">
+          <label for="link-notes">Notes</label>
+          <textarea id="link-notes" name="notes" rows="3" placeholder="Any private notes about this link..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">Save Link</button>
+      </form>
+
+      <div id="success-message">
+        <i class="fas fa-check-circle"></i>
+        <p>Link saved successfully!</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="logout-modal" class="modal-overlay" onclick="closeLogoutModal(event)">
+    <div class="modal-content new-logout-modal" onclick="event.stopPropagation()">
+      <div class="modal-icon">
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M15 3H7C5.89543 3 5 3.89543 5 5V19C5 20.1046 5.89543 21 7 21H15C16.1046 21 17 20.1046 17 19V15M17 9H21M21 9L18 6M21 9L18 12"
+            stroke="#4a90e2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M10 12L21 12" stroke="#ff80a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </div>
+      <div class="modal-body new-logout-body">
+        <h3>Oh no! You're leaving...</h3>
+        <p>Are you sure?</p>
+      </div>
+      <div class="modal-footer new-logout-footer">
+        <button class="btn-cancel-logout" onclick="closeLogoutModal()">Naah, Just Kidding</button>
+        <a href="../index.html" class="btn-confirm-logout">Yes, Log Me Out</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/clutter.js"></script>
+
+</body>
+
+</html>

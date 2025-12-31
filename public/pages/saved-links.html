@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clutter | Saved Links</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+  <link rel="stylesheet" href="../css/clutter.css" />
+
+  <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon" />
+</head>
+
+<body>
+  <button class="menu-toggle" aria-label="Toggle Navigation">
+    <i class="fas fa-bars"></i>
+  </button>
+
+  <div class="sidebar" id="sidebar">
+    <div class="logo">
+      <img src="../images/favicon.png" alt="Clutter Logo" />
+      <h2>Clutter</h2>
+    </div>
+
+    <nav class="nav-section">
+      <ul class="links-list">
+        <li>
+          <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a>
+        </li>
+        <li>
+          <a href="saved-links.html" class="active"><i class="fas fa-link"></i> <span>Saved Links</span></a>
+        </li>
+        <li>
+          <a href="account.html"><i class="fas fa-user-circle"></i> <span>My Account</span></a>
+        </li>
+        <li>
+          <a href="#" id="logout-trigger"><i class="fas fa-sign-out-alt"></i> <span>Log Out</span></a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="dashboard-main-s">
+    <div class="dashboard-title">Saved Links</div>
+
+    <div class="card welcome-section no-anim">
+      <div class="welcome-text">
+        <h3>No Saved Links?</h3>
+        <p>Click the add button to store one.</p>
+      </div>
+      <div class="profile-actions">
+        <button onclick="openModal()">
+          <i class="fas fa-plus"></i> Add New Link
+        </button>
+      </div>
+    </div>
+
+    <div class="search-section">
+      <div class="filter-half">
+        <label for="link-status-filter">Filter by Status:</label>
+        <select id="link-status-filter">
+          <option value="all">All</option>
+          <option value="new">New</option>
+          <option value="starred">Starred</option>
+          <option value="archived">Archived</option>
+        </select>
+      </div>
+
+      <div class="search-half">
+        <input type="text" id="link-search" placeholder="Search by title, URL, or tag...">
+        <i class="fas fa-search search-btn"></i>
+      </div>
+    </div>
+
+    <div class="grid-container">
+      <div class="card-s">
+        <div class="clutter-header">
+          <div class="clutter-title">
+            <span>Temporary Email Website</span>
+          </div>
+
+          <div class="clutter-actions">
+            <span class="status-tag status-starred"><i class="fas fa-star"></i></span>
+
+            <button class="menu-toggle-btn" aria-label="Link actions" onclick="toggleDropdown(this)">
+              <i class="fas fa-ellipsis-v"></i>
+            </button>
+
+            <div class="action-dropdown">
+              <a href="javascript:void(0);" class="dropdown-item star-action">
+                <i class="fas fa-star"></i> Star Link
+              </a>
+              <a href="javascript:void(0);" class="dropdown-item archive-action">
+                <i class="fas fa-archive"></i> Archive Link
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="javascript:void(0);" class="dropdown-item delete-action">
+                <i class="fas fa-trash-alt"></i> Delete Link
+              </a>
+            </div>
+          </div>
+        </div>
+        <a href="https://email-fake.com/" target="_blank" class="clutter-link">
+          https://email-fake.com/
+        </a>
+        <p class="clutter-desc">
+          Description: <strong>Free fake email IDs</strong>
+        </p>
+        <div class="clutter-tags">
+          <span class="tag">#tech</span>
+          <span class="tag">#scam</span>
+          <span class="tag">#email</span>
+        </div>
+      </div>
+
+      <div class="card-s">
+        <div class="clutter-header">
+          <div class="clutter-title">
+            <span>Need For Speed MW 2005</span>
+          </div>
+
+          <div class="clutter-actions">
+            <span class="status-tag status-new">New</span>
+
+            <button class="menu-toggle-btn" aria-label="Link actions" onclick="toggleDropdown(this)">
+              <i class="fas fa-ellipsis-v"></i>
+            </button>
+
+            <div class="action-dropdown">
+              <a href="javascript:void(0);" class="dropdown-item star-action">
+                <i class="fas fa-star"></i> Star Link
+              </a>
+              <a href="javascript:void(0);" class="dropdown-item archive-action">
+                <i class="fas fa-archive"></i> Archive Link
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="javascript:void(0);" class="dropdown-item delete-action">
+                <i class="fas fa-trash-alt"></i> Delete Link
+              </a>
+            </div>
+          </div>
+        </div>
+        <a href="https://archive.org/details/nfsmw_202201" target="_blank" class="clutter-link">
+          https://archive.org/details/nfsmw_202201
+        </a>
+        <p class="clutter-desc">
+          Description: <strong>NFS 2005 free download</strong>
+        </p>
+        <div class="clutter-tags">
+          <span class="tag">#game</span>
+          <span class="tag">#nfs</span>
+          <span class="tag">#racing</span>
+        </div>
+      </div>
+
+      <div class="card-s">
+        <div class="clutter-header">
+          <div class="clutter-title">
+            <span>Red Cloud Storage</span>
+          </div>
+
+          <div class="clutter-actions">
+            <span class="status-tag status-new">New</span>
+
+            <button class="menu-toggle-btn" aria-label="Link actions" onclick="toggleDropdown(this)">
+              <i class="fas fa-ellipsis-v"></i>
+            </button>
+
+            <div class="action-dropdown">
+              <a href="javascript:void(0);" class="dropdown-item star-action">
+                <i class="fas fa-star"></i> Star Link
+              </a>
+              <a href="javascript:void(0);" class="dropdown-item archive-action">
+                <i class="fas fa-archive"></i> Archive Link
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="javascript:void(0);" class="dropdown-item delete-action">
+                <i class="fas fa-trash-alt"></i> Delete Link
+              </a>
+            </div>
+          </div>
+        </div>
+        <a href="https://mega.nz/fm/0TlSBLgb" target="_blank" class="clutter-link">
+          https://mega.nz/fm/0TlSBLgb
+        </a>
+        <p class="clutter-desc">
+          Description: <strong>Best Cloud Storage</strong>
+        </p>
+        <div class="clutter-tags">
+          <span class="tag">#cloud</span>
+          <span class="tag">#storage</span>
+          <span class="tag">#mega</span>
+        </div>
+      </div>
+
+      <div class="card-s">
+        <div class="clutter-header">
+          <div class="clutter-title">
+            <span>Master CSS Flexbox</span>
+          </div>
+
+          <div class="clutter-actions">
+            <span class="status-tag status-new">New</span>
+
+            <button class="menu-toggle-btn" aria-label="Link actions" onclick="toggleDropdown(this)">
+              <i class="fas fa-ellipsis-v"></i>
+            </button>
+
+            <div class="action-dropdown">
+              <a href="javascript:void(0);" class="dropdown-item star-action">
+                <i class="fas fa-star"></i> Star Link
+              </a>
+              <a href="javascript:void(0);" class="dropdown-item archive-action">
+                <i class="fas fa-archive"></i> Archive Link
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="javascript:void(0);" class="dropdown-item delete-action">
+                <i class="fas fa-trash-alt"></i> Delete Link
+              </a>
+            </div>
+          </div>
+        </div>
+        <a href="https://css-tricks.com/flexbox-guide/" target="_blank" class="clutter-link">
+          https://css-tricks.com/flexbox-guide/
+        </a>
+        <p class="clutter-desc">
+          Description: <strong>For complex layouts</strong>
+        </p>
+        <div class="clutter-tags">
+          <span class="tag">#css</span>
+          <span class="tag">#webdev</span>
+          <span class="tag">#design</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+
+  <!--Modals-->
+  <div id="add-link-modal" class="modal-overlay" onclick="closeModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3>Add New Link</h3>
+        <button class="modal-close" onclick="closeModal()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <form id="link-form">
+        <div class="form-group">
+          <label for="link-url">URL *</label>
+          <input type="url" id="link-url" name="url" placeholder="https://www.example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="link-title">Title</label>
+          <input type="text" id="link-title" name="title" placeholder="A descriptive title for your link">
+        </div>
+        <div class="form-group">
+          <label for="link-tags">Tags (Comma Separated)</label>
+          <input type="text" id="link-tags" name="tags" placeholder="productivity, design, tutorial">
+        </div>
+        <div class="form-group">
+          <label for="link-notes">Notes</label>
+          <textarea id="link-notes" name="notes" rows="3" placeholder="Any private notes about this link..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">Save Link</button>
+      </form>
+
+      <div id="success-message">
+        <i class="fas fa-check-circle"></i>
+        <p>Link saved successfully!</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="logout-modal" class="modal-overlay" onclick="closeLogoutModal(event)">
+    <div class="modal-content new-logout-modal" onclick="event.stopPropagation()">
+      <div class="modal-icon">
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M15 3H7C5.89543 3 5 3.89543 5 5V19C5 20.1046 5.89543 21 7 21H15C16.1046 21 17 20.1046 17 19V15M17 9H21M21 9L18 6M21 9L18 12"
+            stroke="#4a90e2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M10 12L21 12" stroke="#ff80a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </div>
+      <div class="modal-body new-logout-body">
+        <h3>Oh no! You're leaving...</h3>
+        <p>Are you sure?</p>
+      </div>
+      <div class="modal-footer new-logout-footer">
+        <button class="btn-cancel-logout" onclick="closeLogoutModal()">Naah, Just Kidding</button>
+        <a href="../index.html" class="btn-confirm-logout">Yes, Log Me Out</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/clutter.js"></script>
+</body>
+
+</html>
