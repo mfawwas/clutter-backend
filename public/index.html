@@ -1,87 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Clutter | Login</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
-</head>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon" />
+  </head>
 
-<body>
+  <body>
     <div class="container-x">
-        <header>
-            <h1 class="logo-s">Clutter</h1>
-            <p>Your all-in-one manager.</p>
-        </header>
+      <header>
+        <h1 class="logo-s">Clutter</h1>
+        <p>Your all-in-one manager.</p>
+      </header>
 
-        <div class="user-image">
-            <img src="images/user-img.jpg" alt="User Profile Image">
-        </div>
+      <div class="user-image">
+        <img src="images/user-img.jpg" alt="User Profile Image" />
+      </div>
 
-        <div class="login-container hidden" id="login-container">
-            <form id="login-form">
-                <div class="input-group">
-                    <label for="login-email">Email Address</label>
-                    <input type="email" id="login-email" placeholder="Enter your email" required>
-                </div>
+      <div class="login-container hidden" id="login-container">
+        <form id="login-form">
+          <div class="input-group">
+            <label for="login-email">Email Address</label>
+            <input
+              name="email"
+              type="email"
+              id="login-email"
+              placeholder="Enter your email"
+            />
+          </div>
 
-                <div class="input-group">
-                    <label for="login-password">Password</label>
-                    <input type="password" id="login-password" placeholder="Enter your password " required>
-                </div>
+          <div class="input-group">
+            <label for="login-password">Password</label>
+            <input
+              name="password"
+              type="password"
+              id="login-password"
+              placeholder="Enter your password "
+            />
+          </div>
 
-                <div class="form-options">
-                    <div class="remember-me">
-                        <input type="checkbox" id="remember">
-                        <label for="remember">Remember me</label>
-                    </div>
-                    <a href="javascript:void(0);" class="forgot-password">Forgot Password?</a>
-                </div>
-                <button type="submit" class="login-btn">LOGIN</button>
-
-                <div class="signup-link">
-                    Don't have an account? <a href="javascript:void(0);" class="forgot-password" id="show-signup">Sign
-                        up</a>
-                </div>
-            </form>
-            <p id="login-message" class="error-message"></p>
-        </div>
-
-        <div class="signup-container active" id="signup-container">
-            <form id="signup-form">
-                <div class="input-group">
-                    <label for="signup-fullname">Fullname</label>
-                    <input type="text" id="signup-name" placeholder="Enter your fullname" required>
-                </div>
-                <div class="input-group">
-                    <label for="signup-fullname">Username</label>
-                    <input type="text" id="signup-username" placeholder="Enter your username" required>
-                </div>
-                <div class="input-group">
-                    <label for="signup-email">Email Address</label>
-                    <input type="email" id="signup-email" placeholder="Enter your email" required>
-                </div>
-                <div class="input-group">
-                    <label for="signup-password">Password</label>
-                    <input type="password" id="signup-password" placeholder="Enter your password" required>
-                </div>
-                <button type="submit" class="login-btn">CREATE ACCOUNT</button>
-            </form>
-            <div class="signup-link">
-                Already have an account? <a href="javascript:void(0);" id="show-login">Log In</a>
+          <div class="form-options">
+            <div class="remember-me">
+              <input type="checkbox" id="remember" />
+              <label for="remember">Remember me</label>
             </div>
-            <p id="signup-message" class="error-message"></p>
-        </div>
+            <a href="javascript:void(0);" class="forgot-password"
+              >Forgot Password?</a
+            >
+          </div>
+          <button type="submit" class="login-btn">LOGIN</button>
 
-        <div class="demo">
-            <h5><a href="pages/dashboard.html">View Dashboard Demo </a></h5>
-        </div>
+          <div class="signup-link">
+            Don't have an account?
+            <a
+              href="javascript:void(0);"
+              class="forgot-password"
+              id="show-signup"
+              >Sign up</a
+            >
+          </div>
+        </form>
+        <p id="login-message" class="error-message"></p>
+      </div>
 
+      <div class="signup-container active" id="signup-container">
+        <form id="signup-form">
+          <div class="input-group">
+            <label for="signup-fullname">Fullname</label>
+            <input
+              name="fullname"
+              type="text"
+              id="signup-name"
+              placeholder="Enter your fullname"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <label for="signup-fullname">Username</label>
+            <input
+              name="username"
+              type="text"
+              id="signup-username"
+              placeholder="Enter your username"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <label for="signup-email">Email Address</label>
+            <input
+              name="email"
+              type="email"
+              id="signup-email"
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <label for="signup-password">Password</label>
+            <input
+              name="password"
+              type="password"
+              id="signup-password"
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+          <button type="submit" class="login-btn">CREATE ACCOUNT</button>
+        </form>
+        <div class="signup-link">
+          Already have an account?
+          <a href="javascript:void(0);" id="show-login">Log In</a>
+        </div>
+        <p id="signup-message" class="error-message"></p>
+      </div>
+
+      <!-- // OTP Container
+      <div class="otp-container hidden" id="otp-container">
+        <form id="otp-form">
+          <div class="input-group">
+            <label for="otp-code">Enter OTP Code</label>
+            <input
+              name="otp"
+              type="text"
+              id="otp-code"
+              placeholder="Enter the 6-digit code"
+            />
+          </div>
+          <button type="submit" class="login-btn">VERIFY OTP</button>
+        </form>
+        <p id="otp-message"></p>
+      </div> -->
+
+      <div class="demo">
+        <h5><a href="pages/dashboard.html">View Dashboard Demo </a></h5>
+      </div>
     </div>
 
     <script src="js/app.js"></script>
-</body>
-
+  </body>
 </html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verify OTP | Clutter</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            background: #0f172a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .otp-container {
+            background: #ffffff;
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .otp-container h1 {
+            margin-bottom: 0.5rem;
+            color: #111827;
+        }
+
+        .otp-container p {
+            margin-bottom: 1.5rem;
+            color: #6b7280;
+        }
+
+        .otp-container input {
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+        }
+
+        .otp-container button {
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1rem;
+            border: none;
+            background: #2563eb;
+            color: #ffffff;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .otp-container button:hover {
+            background: #1d4ed8;
+        }
+
+        #otp-message {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: red;
+        }
+
+        .resend-container {
+            margin-top: 1.2rem;
+        }
+
+        #resend-otp-btn {
+            background: transparent;
+            border: none;
+            color: #2563eb;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        #resend-otp-btn:disabled {
+            color: #9ca3af;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="otp-container">
+        <h1>Verify Your Account</h1>
+        <p>Please enter the OTP sent to your email</p>
+
+        <form id="otp-form">
+            <input type="text" name="otp" placeholder="Enter OTP" maxlength="6" />
+
+            <button type="submit">Verify OTP</button>
+        </form>
+
+        <div class="resend-container">
+            <button id="resend-otp-btn" disabled>
+                Resend OTP (<span id="countdown">30</span>s)
+            </button>
+        </div>
+        <p id="otp-message"></p>
+    </div>
+
+    
+    </div>
+
+    <script>
+        // const otpForm = document.getElementById("otp-form");
+        // const otpMessage = document.getElementById("otp-message");
+
+        // otpForm.addEventListener("submit", async (e) => {
+        //     e.preventDefault();
+
+        //     const formData = new FormData(otpForm);
+        //     const data = Object.fromEntries(formData.entries());
+
+        //     try {
+        //         const res = await fetch("/api/user/verify", {
+        //             method: "PUT",
+        //             headers: {
+        //                 "Content-Type": "application/json",
+        //             },
+        //             body: JSON.stringify({
+        //                 email: data.email.trim(),
+        //                 otp: data.otp.trim(),
+        //             }),
+        //         });
+
+        //         const result = await res.json();
+
+        //         if (!res.ok) {
+        //             otpMessage.style.color = "red";
+        //             otpMessage.textContent =
+        //                 result.message || "OTP verification failed";
+        //             return;
+        //         }
+
+        //         otpMessage.style.color = "green";
+        //         otpMessage.textContent = "OTP verified successfully. Redirecting...";
+
+        //         setTimeout(() => {
+        //             window.location.href = "/login.html";
+        //         }, 1500);
+        //     } catch (error) {
+        //         otpMessage.style.color = "red";
+        //         otpMessage.textContent = "Something went wrong. Try again.";
+        //     }
+        // });
+        const otpForm = document.getElementById("otp-form");
+        const otpMessage = document.getElementById("otp-message");
+        const resendBtn = document.getElementById("resend-otp-btn");
+        const countdownSpan = document.getElementById("countdown");
+
+        const userEmail = sessionStorage.getItem("signupEmail"); // stored after signup
+
+        let cooldown = 30;
+        let timer = null;
+
+        /* ---------- OTP VERIFY ---------- */
+        otpForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(otpForm);
+            const otp = formData.get("otp").trim();
+
+            try {
+                const res = await fetch("/api/user/verify", {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email: userEmail, otp }),
+                });
+
+                const result = await res.json();
+
+                if (!res.ok) {
+                    otpMessage.style.color = "red";
+                    otpMessage.textContent = result.message;
+                    return;
+                }
+
+                otpMessage.style.color = "green";
+                otpMessage.textContent = "Account verified successfully. Redirecting...";
+
+                sessionStorage.removeItem("signupEmail");
+
+                setTimeout(() => {
+                    window.location.href = "/login.html";
+                }, 1500);
+
+            } catch {
+                otpMessage.style.color = "red";
+                otpMessage.textContent = "Verification failed. Try again.";
+            }
+        });
+
+        /* ---------- RESEND OTP ---------- */
+        resendBtn.addEventListener("click", async () => {
+            try {
+                const res = await fetch("/api/user/reset-otp", {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email: userEmail }),
+                });
+
+                const result = await res.json();
+
+                if (!res.ok) {
+                    otpMessage.style.color = "red";
+                    otpMessage.textContent = result.message;
+                    return;
+                }
+
+                otpMessage.style.color = "green";
+                otpMessage.textContent = "OTP resent successfully";
+                startCooldown();
+
+            } catch {
+                otpMessage.style.color = "red";
+                otpMessage.textContent = "Failed to resend OTP";
+            }
+        });
+
+        /* ---------- COOLDOWN TIMER ---------- */
+        function startCooldown() {
+            resendBtn.disabled = true;
+            cooldown = 30;
+            countdownSpan.textContent = cooldown;
+
+            timer = setInterval(() => {
+                cooldown--;
+                countdownSpan.textContent = cooldown;
+
+                if (cooldown <= 0) {
+                    clearInterval(timer);
+                    resendBtn.disabled = false;
+                    resendBtn.textContent = "Resend OTP";
+                }
+            }, 1000);
+        }
+
+        // Start cooldown on page load
+        startCooldown();
+
+    </script>
+</body>
+
+</html>

@@ -86,13 +86,16 @@ const login = async (req, res) => {
 const verifyOtp = async (req, res) => {
   const { email, otp } = req.body;
   try {
-    if (!email || !otp) {
+    if (!otp) {
       return res.status(400).json({ message: "Email and OTP are required" });
     }
 
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(404).json({ message: "Invalid OTP" });
+      return res.status(404).json({ message: "User not found" });
+    }
+    if (user.otp.toString() !== otp.toString()) {
+      return res.status(400).json({ message: "Invalid OTP" });
     }
     if (user.otpExpiry < new Date()) {
       return res.status(400).json({ message: "OTP has expired" });

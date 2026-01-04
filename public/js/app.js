@@ -56,3 +56,54 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+// --- 3. Form Submission Logic ---
+signupForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(signupForm);
+  const data = Object.fromEntries(formData.entries());
+
+  try {
+    const res = await fetch("/api/user/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const result = await res.json();
+    signupMessage.style.color = "green";
+    signupMessage.textContent = result.message;
+    sessionStorage.setItem("signupEmail", data.email);
+
+    setTimeout(() => {
+      window.location.href = "/pages/verify.html";
+    }, 1000);
+  } catch (err) {
+    signupMessage.textContent = "Something went wrong";
+  }
+});
+
+loginForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(loginForm);
+  const data = Object.fromEntries(formData.entries());
+
+  try {
+    const res = await fetch("/api/user/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const result = await res.json();
+    loginMessage.textContent = result.message || "Login successful";
+  } catch (err) {
+    loginMessage.textContent = "Something went wrong";
+  }
+});
